@@ -3,7 +3,6 @@ import logging
 import pandas as pd
 from datetime import datetime
 
-# Configuración del sistema de Logs (Evidencia obligatoria para la rúbrica)
 # Guardará los registros en la carpeta raíz del proyecto
 logging.basicConfig(
     filename='pipeline_dataops.log',

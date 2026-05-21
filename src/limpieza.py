@@ -32,14 +32,13 @@ def ejecutar_limpieza(ruta_entrada, ruta_salida):
         duplicados_eliminados = filas_iniciales - len(df)
         logging.info(f"Transformación: Se eliminaron {duplicados_eliminados} registros duplicados.")
         
-        # 2. Estandarización de texto (transformar a minúsculas para evitar errores futuros)
+        # 2. Estandarización de texto
         cols_texto = ['job', 'marital', 'education', 'contact', 'month', 'poutcome']
         for col in cols_texto:
             if col in df.columns:
                 df[col] = df[col].astype(str).str.lower()
                 
-        # 3. Monitoreo de anomalías: Conteo de valores 'unknown' 
-        # (Esto te sirve para justificar el manejo de anomalías en la presentación)
+        # 3. Monitoreo de anomalías
         unknowns = (df == 'unknown').sum().sum()
         logging.info(f"Monitoreo: Se detectaron {unknowns} valores 'unknown' en variables categóricas. Se mantienen para no perder volumen analítico.")
         
@@ -56,7 +55,7 @@ def ejecutar_limpieza(ruta_entrada, ruta_salida):
         return False
 
 if __name__ == "__main__":
-    # Rutas de entrada (el crudo que creamos) y salida (el limpio)
+    # Rutas de entrada y salida
     RUTA_RAW = "data/raw_ingested.csv"
     RUTA_CLEAN = "data/banco_limpio.csv"
     

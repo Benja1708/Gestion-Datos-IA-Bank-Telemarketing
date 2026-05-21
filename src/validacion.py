@@ -37,13 +37,13 @@ def ejecutar_validacion(ruta_entrada, ruta_salida):
             logging.info("Validación estructural aprobada: Todas las columnas críticas están presentes.")
             
         # 2. Validación Semántica: Reglas de negocio del banco
-        # Regla A: Clientes deben ser mayores de edad (18+)
+        # Clientes deben ser mayores de edad (18+)
         filas_invalidas_edad = df[df['age'] < 18].index
         if len(filas_invalidas_edad) > 0:
             logging.warning(f"Anomalía semántica detectada: {len(filas_invalidas_edad)} registros con edad < 18. Excluyendo del dataset final.")
             df = df.drop(filas_invalidas_edad)
             
-        # Regla B: El saldo (balance) debe ser un valor numérico válido (rellenamos vacíos con 0)
+        # El saldo debe ser un valor numérico válido (rellenamos vacíos con 0)
         nulos_balance = df['balance'].isnull().sum()
         if nulos_balance > 0:
             logging.warning(f"Anomalía semántica: {nulos_balance} registros sin saldo definido. Imputando valor 0.")
